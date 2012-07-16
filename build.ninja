@@ -1,0 +1,11 @@
+rule cc
+  command = clang -c $in -o $out -Wall -fcolor-diagnostics
+build error.o: cc error.c
+build pass1.o: cc pass1.c
+build pass2.o: cc pass2.c
+build sym_tab.o: cc sym_tab.c
+build thasm.o: cc thasm.c
+
+rule link
+  command = clang $in -o $out
+build thasm: link error.o pass1.o pass2.o sym_tab.o thasm.o
