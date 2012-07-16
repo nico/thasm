@@ -1,5 +1,6 @@
 rule cc
-  command = clang -c $in -o $out -Wall -fcolor-diagnostics
+  depfile = $out.d
+  command = clang -MMD -MF $out.d -c $in -o $out -Wall -fcolor-diagnostics
 build error.o: cc error.c
 build pass1.o: cc pass1.c
 build pass2.o: cc pass2.c
